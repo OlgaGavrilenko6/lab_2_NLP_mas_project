@@ -14,15 +14,15 @@
 
 ### Gather Tools (gather_tools_node)
 
-ReAct-агент, задача которого — добрать недостающую информацию через инструменты.
+ReAct-агент, задача которого — дособрать недостающую информацию через инструменты.
 
-Использует focus (что именно нужно добрать), который формирует reviewer.
+Использует focus (что именно нужно дособрать), который формирует reviewer.
 
 Добавляет результаты инструментов в tool_context (контекст наблюдений).
 
 ## Специализированные агенты
 
-conceptual_agent_node: теоретические вопросы по MAS/LLM-агентам.
+conceptual_agent_node: теоретические вопросы по LLM-агентам.
 
 architecture_agent_node: архитектура систем, дизайн state, handoff, memory.
 
@@ -58,31 +58,7 @@ reviewer → gather_tools → (специализированный агент) 
 Цикл ограничен max_rounds, чтобы избежать зацикливания.
 
 ## Mermaid-диаграмма
-flowchart TD
-    U[User query] --> R[Router]
-    R --> P[Planner]
-
-    P -->|intent=conceptual| A1[Conceptual agent]
-    P -->|intent=architecture| A2[Architecture agent]
-    P -->|intent=coding| A3[Coding agent]
-    P -->|intent=daily| A4[Daily agent]
-    P -->|intent=literature| A5[Literature agent]
-
-    A1 --> RV[Reviewer]
-    A2 --> RV
-    A3 --> RV
-    A4 --> RV
-    A5 --> RV
-
-    RV -->|need_more=true| GT[Gather tools]
-    GT -->|handoff back| A1
-    GT -->|handoff back| A2
-    GT -->|handoff back| A3
-    GT -->|handoff back| A4
-    GT -->|handoff back| A5
-
-    RV -->|need_more=false| F[Finalize]
-    F --> OUT[Final answer]
+![](/lab_2_NLP.png)
 
 ## Handoff:
 
